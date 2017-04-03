@@ -1,0 +1,166 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/robrich/gulp-ignore"
+
+    >gulp-ignore (v2.0.2)</a>
+</h1>
+<h4>Include or exclude gulp files from the stream based on a condition</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.gulp-ignore">module gulp-ignore</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-ignore.exclude">
+            function <span class="apidocSignatureSpan">gulp-ignore.</span>exclude
+            <span class="apidocSignatureSpan">(condition, minimatchOptions)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-ignore.include">
+            function <span class="apidocSignatureSpan">gulp-ignore.</span>include
+            <span class="apidocSignatureSpan">(condition, minimatchOptions)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.gulp-ignore" id="apidoc.module.gulp-ignore">module gulp-ignore</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-ignore.exclude" id="apidoc.element.gulp-ignore.exclude">
+        function <span class="apidocSignatureSpan">gulp-ignore.</span>exclude
+        <span class="apidocSignatureSpan">(condition, minimatchOptions)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">exclude = function (condition, minimatchOptions){
+	return through.obj(function (file, enc, callback) {
+		if (!gulpmatch(file, condition, minimatchOptions)) {
+			this.push(file);
+		}
+		return callback();
+	});
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+var jshint = require(&#x27;gulp-jshint&#x27;);
+
+var condition = &#x27;./gulpfile.js&#x27;;
+
+gulp.task(&#x27;task&#x27;, function() {
+  gulp.src(&#x27;./**/*.js&#x27;)
+    .pipe(jshint())
+    .pipe(gulpIgnore.<span class="apidocCodeKeywordSpan">exclude</span>(condition))
+    .pipe(uglify())
+    .pipe(gulp.dest(&#x27;./dist/&#x27;));
+});
+```
+
+Run JSHint on everything, remove gulpfile from the stream, then uglify and write everything else.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-ignore.include" id="apidoc.element.gulp-ignore.include">
+        function <span class="apidocSignatureSpan">gulp-ignore.</span>include
+        <span class="apidocSignatureSpan">(condition, minimatchOptions)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">include = function (condition, minimatchOptions){
+	return through.obj(function (file, enc, callback) {
+		if (gulpmatch(file, condition, minimatchOptions)) {
+			this.push(file);
+		}
+		return callback();
+	});
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+var jshint = require(&#x27;gulp-jshint&#x27;);
+
+var condition = &#x27;./public/**.js&#x27;;
+
+gulp.task(&#x27;task&#x27;, function() {
+  gulp.src(&#x27;./**/*.js&#x27;)
+    .pipe(jshint())
+    .pipe(gulpIgnore.<span class="apidocCodeKeywordSpan">include</span>(condition))
+    .pipe(uglify())
+    .pipe(gulp.dest(&#x27;./dist/&#x27;));
+});
+```
+
+Run JSHint on everything, filter to include only files from in the public folder, then uglify and write them.
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
