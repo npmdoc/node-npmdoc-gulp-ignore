@@ -1,7 +1,12 @@
-# api documentation for  [gulp-ignore (v2.0.2)](https://github.com/robrich/gulp-ignore)  [![npm package](https://img.shields.io/npm/v/npmdoc-gulp-ignore.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-gulp-ignore) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-gulp-ignore.svg)](https://travis-ci.org/npmdoc/node-npmdoc-gulp-ignore)
+# npmdoc-gulp-ignore
+
+#### basic api documentation for  [gulp-ignore (v2.0.2)](https://github.com/robrich/gulp-ignore)  [![npm package](https://img.shields.io/npm/v/npmdoc-gulp-ignore.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-gulp-ignore) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-gulp-ignore.svg)](https://travis-ci.org/npmdoc/node-npmdoc-gulp-ignore)
+
 #### Include or exclude gulp files from the stream based on a condition
 
 [![NPM](https://nodei.co/npm/gulp-ignore.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/gulp-ignore)
+
+- [https://npmdoc.github.io/node-npmdoc-gulp-ignore/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-gulp-ignore/build/apidoc.html)
 
 [![apidoc](https://npmdoc.github.io/node-npmdoc-gulp-ignore/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-gulp-ignore/build/apidoc.html)
 
@@ -67,187 +72,9 @@
     "scripts": {
         "test": "mocha && jshint ."
     },
-    "version": "2.0.2"
+    "version": "2.0.2",
+    "bin": {}
 }
-```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module gulp-ignore](#apidoc.module.gulp-ignore)
-1.  [function <span class="apidocSignatureSpan"></span>gulp-ignore (condition, minimatchOptions)](#apidoc.element.gulp-ignore.gulp-ignore)
-1.  [function <span class="apidocSignatureSpan">gulp-ignore.</span>exclude (condition, minimatchOptions)](#apidoc.element.gulp-ignore.exclude)
-1.  [function <span class="apidocSignatureSpan">gulp-ignore.</span>include (condition, minimatchOptions)](#apidoc.element.gulp-ignore.include)
-1.  [function <span class="apidocSignatureSpan">gulp-ignore.</span>toString ()](#apidoc.element.gulp-ignore.toString)
-
-#### [module gulp-ignore.exclude](#apidoc.module.gulp-ignore.exclude)
-1.  [function <span class="apidocSignatureSpan">gulp-ignore.</span>exclude (condition, minimatchOptions)](#apidoc.element.gulp-ignore.exclude.exclude)
-1.  [function <span class="apidocSignatureSpan">gulp-ignore.exclude.</span>include (condition, minimatchOptions)](#apidoc.element.gulp-ignore.exclude.include)
-
-
-
-# <a name="apidoc.module.gulp-ignore"></a>[module gulp-ignore](#apidoc.module.gulp-ignore)
-
-#### <a name="apidoc.element.gulp-ignore.gulp-ignore"></a>[function <span class="apidocSignatureSpan"></span>gulp-ignore (condition, minimatchOptions)](#apidoc.element.gulp-ignore.gulp-ignore)
-- description and source-code
-```javascript
-gulp-ignore = function (condition, minimatchOptions){
-	return through.obj(function (file, enc, callback) {
-		if (!gulpmatch(file, condition, minimatchOptions)) {
-			this.push(file);
-		}
-		return callback();
-	});
-}
-```
-- example usage
-```shell
-n/a
-```
-
-#### <a name="apidoc.element.gulp-ignore.exclude"></a>[function <span class="apidocSignatureSpan">gulp-ignore.</span>exclude (condition, minimatchOptions)](#apidoc.element.gulp-ignore.exclude)
-- description and source-code
-```javascript
-exclude = function (condition, minimatchOptions){
-	return through.obj(function (file, enc, callback) {
-		if (!gulpmatch(file, condition, minimatchOptions)) {
-			this.push(file);
-		}
-		return callback();
-	});
-}
-```
-- example usage
-```shell
-...
-var jshint = require('gulp-jshint');
-
-var condition = './gulpfile.js';
-
-gulp.task('task', function() {
-  gulp.src('./**/*.js')
-    .pipe(jshint())
-    .pipe(gulpIgnore.exclude(condition))
-    .pipe(uglify())
-    .pipe(gulp.dest('./dist/'));
-});
-'''
-
-Run JSHint on everything, remove gulpfile from the stream, then uglify and write everything else.
-...
-```
-
-#### <a name="apidoc.element.gulp-ignore.include"></a>[function <span class="apidocSignatureSpan">gulp-ignore.</span>include (condition, minimatchOptions)](#apidoc.element.gulp-ignore.include)
-- description and source-code
-```javascript
-include = function (condition, minimatchOptions){
-	return through.obj(function (file, enc, callback) {
-		if (gulpmatch(file, condition, minimatchOptions)) {
-			this.push(file);
-		}
-		return callback();
-	});
-}
-```
-- example usage
-```shell
-...
-var jshint = require('gulp-jshint');
-
-var condition = './public/**.js';
-
-gulp.task('task', function() {
-  gulp.src('./**/*.js')
-    .pipe(jshint())
-    .pipe(gulpIgnore.include(condition))
-    .pipe(uglify())
-    .pipe(gulp.dest('./dist/'));
-});
-'''
-
-Run JSHint on everything, filter to include only files from in the public folder, then uglify and write them.
-...
-```
-
-#### <a name="apidoc.element.gulp-ignore.toString"></a>[function <span class="apidocSignatureSpan">gulp-ignore.</span>toString ()](#apidoc.element.gulp-ignore.toString)
-- description and source-code
-```javascript
-toString = function () {
-    return toString;
-}
-```
-- example usage
-```shell
-n/a
-```
-
-
-
-# <a name="apidoc.module.gulp-ignore.exclude"></a>[module gulp-ignore.exclude](#apidoc.module.gulp-ignore.exclude)
-
-#### <a name="apidoc.element.gulp-ignore.exclude.exclude"></a>[function <span class="apidocSignatureSpan">gulp-ignore.</span>exclude (condition, minimatchOptions)](#apidoc.element.gulp-ignore.exclude.exclude)
-- description and source-code
-```javascript
-exclude = function (condition, minimatchOptions){
-	return through.obj(function (file, enc, callback) {
-		if (!gulpmatch(file, condition, minimatchOptions)) {
-			this.push(file);
-		}
-		return callback();
-	});
-}
-```
-- example usage
-```shell
-...
-var jshint = require('gulp-jshint');
-
-var condition = './gulpfile.js';
-
-gulp.task('task', function() {
-  gulp.src('./**/*.js')
-    .pipe(jshint())
-    .pipe(gulpIgnore.exclude(condition))
-    .pipe(uglify())
-    .pipe(gulp.dest('./dist/'));
-});
-'''
-
-Run JSHint on everything, remove gulpfile from the stream, then uglify and write everything else.
-...
-```
-
-#### <a name="apidoc.element.gulp-ignore.exclude.include"></a>[function <span class="apidocSignatureSpan">gulp-ignore.exclude.</span>include (condition, minimatchOptions)](#apidoc.element.gulp-ignore.exclude.include)
-- description and source-code
-```javascript
-include = function (condition, minimatchOptions){
-	return through.obj(function (file, enc, callback) {
-		if (gulpmatch(file, condition, minimatchOptions)) {
-			this.push(file);
-		}
-		return callback();
-	});
-}
-```
-- example usage
-```shell
-...
-var jshint = require('gulp-jshint');
-
-var condition = './public/**.js';
-
-gulp.task('task', function() {
-  gulp.src('./**/*.js')
-    .pipe(jshint())
-    .pipe(gulpIgnore.include(condition))
-    .pipe(uglify())
-    .pipe(gulp.dest('./dist/'));
-});
-'''
-
-Run JSHint on everything, filter to include only files from in the public folder, then uglify and write them.
-...
 ```
 
 
